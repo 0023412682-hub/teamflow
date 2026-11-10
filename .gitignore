@@ -1,0 +1,37 @@
+# Cấu hình riêng của Joomla trên máy cá nhân
+/configuration.php
+/configuration.php~
+/configuration.php.bak
+
+# Cache, tệp tạm và log
+/cache/
+/administrator/cache/
+/tmp/
+/logs/
+/administrator/logs/
+
+# Tệp người dùng tải lên — sửa đường dẫn nếu nhóm lưu ở nơi khác
+/images/uploads/
+/files/submissions/
+
+# Bản sao cơ sở dữ liệu và bản sao lưu
+*.sql
+*.sql.gz
+/backups/
+
+# Tệp hệ thống macOS
+.DS_Store
+
+/configuration.php
+/Bản sao configuration.php
+.DS_Store
+/cache/
+/administrator/cache/
+/tmp/
+/logs/
+/administrator/logs/
+*.sql
+*.sql.gz
+
+/quanlynhom_db.sql
+/database/dumps/
