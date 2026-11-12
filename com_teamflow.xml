@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" method="upgrade" version="5.0">
+    <name>com_teamflow</name>
+    <author>TeamFlow</author>
+    <creationDate>2026-11</creationDate>
+    <version>0.1.5</version>
+    <description>TeamFlow - Quan ly bai tap nhom</description>
+    <element>com_teamflow</element>
+
+    <namespace path="src">Joomla\Component\Teamflow</namespace>
+
+    <files folder="site">
+        <folder>src</folder>
+        <folder>tmpl</folder>
+    </files>
+
+    <administration>
+        <files folder="admin">
+            <folder>services</folder>
+        </files>
+    </administration>
+</extension>
