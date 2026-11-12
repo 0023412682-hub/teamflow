@@ -1,4 +1,3 @@
-
 <?php
 
 namespace Joomla\Component\Teamflow\Site\Model;
