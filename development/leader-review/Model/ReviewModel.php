@@ -73,7 +73,7 @@ class ReviewModel extends BaseDatabaseModel
             )
             ->where(
                 $db->quoteName('g.is_active') . ' = 1'
-            )
+         )
             ->where(
                 $db->quoteName('s.review_status')
                 . ' = ' . $db->quote('pending')
