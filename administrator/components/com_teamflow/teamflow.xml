@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" method="upgrade">
+    <name>com_teamflow</name>
+    <element>com_teamflow</element>
+    <creationDate>2026-11-12</creationDate>
+    <author>TeamFlow</author>
+    <version>0.1.0</version>
+    <description>TeamFlow - Quan ly nhom va nhiem vu</description>
+
+    <namespace path="src">Joomla\Component\Teamflow</namespace>
+
+    <administration>
+        <files>
+            <folder>services</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+            <filename>teamflow.xml</filename>
+        </files>
+    </administration>
+</extension>
