@@ -80,7 +80,113 @@ $cssUrl = Uri::root(true)
         <?php endif; ?>
     </div>
 </section></div>
-<section class="panel"><div class="panelhead"><h2>▥ Tiến độ nhóm</h2><span class="hint">7 ngày gần nhất (minh họa)</span></div><div class="progress"><svg viewBox="0 0 650 215" role="img" aria-label="Biểu đồ tiến độ minh họa 7 ngày"><defs><linearGradient id="fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d1e5fa"/><stop offset="1" stop-color="#fff"/></linearGradient></defs><g stroke="#d6e2ed" stroke-width="1"><path d="M48 20H620 M48 60H620 M48 100H620 M48 140H620 M48 180H620"/></g><g font-size="12" fill="#52677d"><text x="14" y="24">100</text><text x="21" y="64">75</text><text x="21" y="104">50</text><text x="21" y="144">25</text><text x="28" y="184">0</text><text x="38" y="202">09/01</text><text x="133" y="202">10/01</text><text x="225" y="202">11/01</text><text x="320" y="202">12/01</text><text x="413" y="202">13/01</text><text x="505" y="202">14/01</text><text x="591" y="202">15/01</text></g><path d="M48 148L140 132L235 116L330 116L425 84L520 68L620 60V180H48Z" fill="url(#fill)"/><polyline points="48,148 140,132 235,116 330,116 425,84 520,68 620,60" fill="none" stroke="#176eb2" stroke-width="3"/><g fill="white" stroke="#176eb2" stroke-width="3"><circle cx="48" cy="148" r="4"/><circle cx="140" cy="132" r="4"/><circle cx="235" cy="116" r="4"/><circle cx="330" cy="116" r="4"/><circle cx="425" cy="84" r="4"/><circle cx="520" cy="68" r="4"/><circle cx="620" cy="60" r="4"/></g></svg><div><div class="progress-side">◎ Tiến độ hiện tại<strong id="percent">50%</strong></div><div class="legend" id="legend"></div></div></div><p class="note">Đường biểu đồ là dữ liệu mẫu; số liệu thống kê được tính từ các phân công trong bản demo.</p></section>
+<?php
+$totalTasks = (int) ($this->totalCount ?? 0);
+$completedTasks = (int) ($this->doneCount ?? 0);
+$activeTasks = (int) ($this->activeCount ?? 0);
+$pendingTasks = (int) ($this->pendingCount ?? 0);
+
+$percent = $totalTasks > 0
+    ? round($completedTasks * 100 / $totalTasks)
+    : 0;
+
+$days = $this->progressDays ?? [];
+$points = [];
+
+foreach ($days as $i => $day) {
+    $x = 48 + $i * (572 / 6);
+    $y = 180 - max(0, min(100, (float) $day['percent'])) * 1.4;
+
+    $points[] = [
+        'x' => round($x, 1),
+        'y' => round($y, 1),
+        'label' => (string) $day['label']
+    ];
+}
+
+$polyline = implode(' ', array_map(
+    static function ($point) {
+        return $point['x'] . ',' . $point['y'];
+    },
+    $points
+));
+?>
+
+<section class="panel">
+    <div class="panelhead">
+        <h2>▥ Tiến độ nhóm</h2>
+        <span class="hint">7 ngày gần nhất</span>
+    </div>
+
+    <div class="progress">
+        <svg viewBox="0 0 650 220"
+             role="img"
+             aria-label="Biểu đồ tiến độ nhóm 7 ngày">
+
+            <g stroke="#d6e2ed" stroke-width="1">
+                <path d="M48 40H620 M48 75H620 M48 110H620 M48 145H620 M48 180H620"/>
+            </g>
+
+            <g fill="#52677d" font-size="12">
+                <text x="12" y="44">100%</text>
+                <text x="19" y="79">75%</text>
+                <text x="19" y="114">50%</text>
+                <text x="19" y="149">25%</text>
+                <text x="26" y="184">0%</text>
+            </g>
+
+            <?php foreach ($points as $point) : ?>
+                <text x="<?php echo $point['x']; ?>"
+                      y="205"
+                      text-anchor="middle"
+                      fill="#52677d"
+                      font-size="12">
+                    <?php echo htmlspecialchars(
+                        $point['label'],
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ); ?>
+                </text>
+            <?php endforeach; ?>
+
+            <polyline
+                points="<?php echo htmlspecialchars($polyline, ENT_QUOTES, 'UTF-8'); ?>"
+                fill="none"
+                stroke="#176eb2"
+                stroke-width="3"
+                stroke-linejoin="round"
+            />
+
+            <?php foreach ($points as $point) : ?>
+                <circle
+                    cx="<?php echo $point['x']; ?>"
+                    cy="<?php echo $point['y']; ?>"
+                    r="4"
+                    fill="white"
+                    stroke="#176eb2"
+                    stroke-width="3"
+                />
+            <?php endforeach; ?>
+        </svg>
+
+        <div>
+            <div class="progress-side">
+                ◎ Tiến độ hiện tại
+                <strong><?php echo $percent; ?>%</strong>
+            </div>
+
+            <div class="legend">
+                <span>✓ Đã hoàn thành: <?php echo $completedTasks; ?></span>
+                <span>◷ Đang thực hiện: <?php echo $activeTasks; ?></span>
+                <span>⌛ Chờ duyệt: <?php echo $pendingTasks; ?></span>
+            </div>
+        </div>
+    </div>
+
+    <p class="note">
+        Tiến độ dựa trên lịch sử bài nộp và kết quả duyệt trong MySQL.
+    </p>
+</section>
 <p class="note">Bản thử nghiệm giao diện Phần 3: dữ liệu mẫu lưu trong trình duyệt trên máy này, chưa kết nối PHP, MySQL hoặc tài khoản Joomla. Có thể thay đổi trạng thái và tạo phân công để thử giao diện.</p>
 </main>
 <div class="modal" id="modal"><div class="dialog"><h2>Phân công công việc</h2><form id="assignForm"><label for="member">Thành viên thực hiện</label><select id="member" required><option value="">-- Chọn thành viên --</option><option>Nguyễn Thanh</option><option>Trần Long</option><option>Phạm Trang</option><option>Lê Quang</option></select><label for="task_group_id">Nhiệm vụ của nhóm</label><select id="task_group_id" required><option value="1">Bài tập nhóm số 1</option><option value="2">Bài tập nhóm số 2</option></select><label for="title">Tên công việc</label><input id="title" required maxlength="255" placeholder="Ví dụ: Thiết kế giao diện"><label for="description">Mô tả</label><textarea id="description"></textarea><label for="due_at">Hạn hoàn thành (demo)</label><input type="date" id="due_at" required><footer><button type="button" class="secondary" onclick="closeDialog()">Hủy</button><button class="primary" type="submit">Giao nhiệm vụ</button></footer></form></div></div><div class="toast" id="toast" role="status"></div>

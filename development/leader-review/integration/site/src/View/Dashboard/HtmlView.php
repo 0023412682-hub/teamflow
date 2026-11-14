@@ -15,6 +15,7 @@ class HtmlView extends BaseHtmlView
     public $totalCount = 0;
     public $doneCount = 0;
     public $activeCount = 0;
+    public $progressDays = [];
 
     public function display($tpl = null)
     {
@@ -136,7 +137,10 @@ class HtmlView extends BaseHtmlView
         $query = $db->getQuery(true)
             ->select([
                 $db->quoteName('s.assignment_id'),
-                $db->quoteName('s.review_status')
+                $db->quoteName('s.review_status'),
+                $db->quoteName('s.attempt_no'),
+                $db->quoteName('s.submitted_at'),
+                $db->quoteName('s.reviewed_at')
             ])
             ->from($db->quoteName('#__teamflow_submissions', 's'))
             ->join(
@@ -213,6 +217,59 @@ class HtmlView extends BaseHtmlView
 
 
 
+        // TEAMFLOW_PROGRESS_CHART
+        $this->progressDays = [];
+
+        $today = new \DateTimeImmutable(
+            'today',
+            new \DateTimeZone('Asia/Ho_Chi_Minh')
+        );
+
+        for ($offset = 6; $offset >= 0; $offset--) {
+            $day = $today->modify("-{$offset} days");
+            $endOfDay = $day->format('Y-m-d') . ' 23:59:59';
+
+            $latest = [];
+
+            foreach ($submissions as $submission) {
+                if (
+                    empty($submission->submitted_at)
+                    || $submission->submitted_at > $endOfDay
+                ) {
+                    continue;
+                }
+
+                $assignmentId = (int) $submission->assignment_id;
+
+                if (!isset($latest[$assignmentId])) {
+                    $latest[$assignmentId] = $submission;
+                }
+            }
+
+            $approved = 0;
+
+            foreach ($this->assignments as $assignment) {
+                $submission = $latest[(int) $assignment->id] ?? null;
+
+                if (
+                    $submission
+                    && $submission->review_status === 'approved'
+                    && !empty($submission->reviewed_at)
+                    && $submission->reviewed_at <= $endOfDay
+                ) {
+                    $approved++;
+                }
+            }
+
+            $percent = $this->totalCount > 0
+                ? round($approved * 100 / $this->totalCount)
+                : 0;
+
+            $this->progressDays[] = [
+                'label' => $day->format('d/m'),
+                'percent' => $percent
+            ];
+        }
         parent::display($tpl);
     }
 }
