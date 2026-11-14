@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="component" method="upgrade">
+    <name>com_teamflow</name>
+    <element>com_teamflow</element>
+    <version>1.0.0</version>
+    <description>TeamFlow - Quan ly phan cong va duyet bai</description>
+
+    <namespace path="src">Joomla\Component\Teamflow</namespace>
+
+    <files folder="site">
+    <folder>src</folder>
+    <folder>tmpl</folder>
+    <folder>media</folder>
+    </files>
+
+    <administration>
+        <files folder="admin">
+            <folder>services</folder>
+        </files>
+    </administration>
+</extension>
