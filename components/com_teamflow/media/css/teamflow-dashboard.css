@@ -1,0 +1,508 @@
+/* TeamFlow Dashboard: expand Joomla Cassiopeia content area only on this page. */
+@supports selector(.site-grid:has(.teamflow-dashboard)) {
+  .site-grid:has(.teamflow-dashboard) {
+    display: block;
+    width: min(100%, 1500px);
+    max-width: 1500px;
+    margin-inline: auto;
+    padding-inline: clamp(12px, 2vw, 24px);
+  }
+  .site-grid:has(.teamflow-dashboard) .container-component {
+    display: block;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+  }
+  /* Dashboard has its own sidebar; hide Cassiopeia's duplicate right sidebar here only. */
+  .site-grid:has(.teamflow-dashboard) .container-sidebar-right,
+  .site-grid:has(.teamflow-dashboard) .container-sidebar-left {
+    display: none;
+  }
+}
+
+@scope (.teamflow-dashboard) {
+
+:scope{--navy:#14274e;--blue:#0861a7;--sidebar:#07518d;--pale:#eaf3fc;--border:#c8d8e8;--bg:#f1f6fb;--ink:#1b3051;--green:#167a43;--orange:#a96a08;--purple:#6242a4}
+*{box-sizing:border-box}:scope{margin:0;background:var(--bg);font:15px Arial,sans-serif;color:var(--ink)}button,input,select,textarea{font:inherit}button{cursor:pointer}header{height:64px;background:#fff;display:flex;align-items:center;gap:20px;padding:0 26px;border-bottom:1px solid #d5e1ed}header .logo{font-size:25px;font-weight:800;color:var(--navy);white-space:nowrap}.logo b{background:#0861a7;color:white;padding:7px 9px;border-radius:10px;margin-right:9px;font-size:21px}header .subtitle{border-left:1px solid #b7c4d3;padding-left:22px}header .account{margin-left:auto;white-space:nowrap}aside{position:fixed;width:235px;top:64px;bottom:0;background:linear-gradient(170deg,#095594,#07477c);padding:22px 9px}aside a{display:flex;gap:14px;align-items:center;color:#fff;text-decoration:none;padding:16px;border-radius:10px;font-size:17px;margin-bottom:9px}aside a.active{background:white;color:var(--navy);font-weight:bold}main{margin-left:235px;padding:24px 20px 45px;max-width:1600px}h1{font-size:31px;margin:2px 0 16px;color:#13254a}h2{font-size:21px;margin:0 0 16px;color:#14274e}.groupbar,.panel,.metric{background:white;border:1px solid var(--border);border-radius:10px}.groupbar{padding:16px;display:flex;align-items:center;gap:25px;flex-wrap:wrap;margin-bottom:14px}.groupbar span+span{border-left:1px solid #b8cadb;padding-left:25px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}.metric{display:flex;align-items:center;gap:17px;padding:18px 20px}.metric .ico{font-size:34px;color:#0b528d}.metric label{color:#31445c;display:block}.metric strong{display:block;font-size:28px;margin-top:3px}.columns{display:grid;grid-template-columns:1.55fr 1fr;gap:14px}.panel{padding:18px;margin-bottom:14px}.panelhead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.primary{border:none;background:#0960a6;color:white;padding:10px 17px;border-radius:7px;font-weight:700}.secondary{border:1px solid #a8bcd1;background:white;color:var(--navy);padding:9px 12px;border-radius:7px}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 14px}.filters select{flex:1;min-width:140px;padding:10px;background:white;border:1px solid #b4c9dc;border-radius:7px;color:var(--ink)}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse}th{background:#d8e8fc;color:#1c2e4a}td,th{text-align:left;padding:12px 10px;border:1px solid #d5e1eb}td{background:#fff}.avatar{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:100%;background:#bed7f6;margin-right:6px;font-weight:bold}.chip{display:inline-block;padding:7px 9px;border-radius:22px;font-size:13px;white-space:nowrap}.approved{background:#ddf5e4;color:#116939}.in_progress{background:#fff0d1;color:#965e00}.pending{background:#e8ddfa;color:#60389b}.revision_required{background:#fce2e2;color:#9e2b30}.filebox{background:#eaf3ff;border-radius:10px;padding:15px;margin:8px 0 16px}.filebox b{display:block;margin-bottom:8px}.hint{color:#5c6e81;font-size:13px}textarea,input,select{max-width:100%}.reviewtext{width:100%;min-height:65px;resize:vertical;border:1px solid #bdccdc;border-radius:8px;padding:11px}.reviewactions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.approvebtn,.revisebtn{flex:1;padding:11px;border-radius:9px;font-weight:bold}.approvebtn{background:#e5f7e9;border:1px solid #1b8144;color:#136738}.revisebtn{background:#f6efff;border:1px solid #6b43aa;color:#59318c}.progress{display:grid;grid-template-columns:2fr 1fr;gap:25px;align-items:center}.progress svg{width:100%;height:auto;max-height:235px}.progress-side{text-align:center;background:#eef6ff;border-radius:12px;padding:20px}.progress-side strong{font-size:44px;color:#143f7c;display:block;margin-top:10px}.legend{margin-top:10px;font-size:13px}.legend span{display:block;margin:8px 0}.empty{background:#f2f7fc;padding:30px 12px;border-radius:10px;text-align:center;color:#63758b}.modal{position:fixed;inset:0;background:#101e34a8;display:none;align-items:center;justify-content:center;padding:15px;z-index:5}.modal.show{display:flex}.dialog{background:#fff;width:min(95vw,560px);padding:24px;border-radius:14px;box-shadow:0 16px 50px #15283a66}.dialog h2{margin:0 0 15px}.dialog label{display:block;margin-top:12px;font-weight:bold}.dialog input,.dialog select,.dialog textarea{width:100%;border:1px solid #b7c9dc;border-radius:7px;padding:10px;margin-top:5px}.dialog textarea{min-height:76px}.dialog footer{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}.note{color:#4f6480;font-size:13px;margin-top:12px}.toast{position:fixed;bottom:22px;right:24px;background:#153c68;color:white;padding:13px 20px;border-radius:9px;display:none;z-index:9;max-width:390px}.toast.show{display:block}@media(max-width:1120px){.columns{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){header{padding:10px;height:auto;flex-wrap:wrap;gap:9px}.subtitle{display:none}aside{position:static;width:auto;display:flex;overflow:auto;padding:6px}aside a{min-width:max-content;padding:12px;font-size:14px;margin:0}main{margin:0;padding:15px}.metrics{grid-template-columns:repeat(2,1fr)}.metric{padding:11px;gap:7px}.metric .ico{font-size:25px}.metric strong{font-size:23px}.progress{grid-template-columns:1fr}.groupbar{gap:9px}.groupbar span+span{border:0;padding-left:0}}
+
+
+/* TeamFlow layout on Joomla */
+:scope {
+    display: grid;
+    grid-template-columns: 235px minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    width: 100%;
+    min-width: 0;
+    min-height: 800px;
+    overflow: visible;
+}
+
+header {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: 100%;
+}
+
+aside {
+    position: static;
+    grid-column: 1;
+    grid-row: 2;
+    width: 235px;
+    min-height: 100%;
+}
+
+main {
+    display: block;
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+    min-width: 0;
+    width: 100%;
+    max-width: none;
+}
+
+@media (max-width: 850px) {
+    :scope {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    header, aside, main {
+        grid-column: 1;
+    }
+
+    header { grid-row: 1; }
+
+    aside {
+        grid-row: 2;
+        width: 100%;
+        min-height: 0;
+    }
+
+    main { grid-row: 3; }
+}
+
+/* Refine the real TeamFlow dashboard inside its own scope. */
+:scope {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    grid-template-columns: clamp(190px, 19vw, 235px) minmax(0, 1fr);
+    min-height: 620px;
+}
+header { min-width: 0; }
+aside { width: auto; min-width: 0; }
+aside a { overflow-wrap: anywhere; }
+main { padding: clamp(16px, 2.2vw, 30px); overflow: visible; }
+.columns { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); }
+.columns > *, .metrics > *, .panel, .progress > * { min-width: 0; }
+.metric { gap: 12px; padding: 15px; }
+.metric strong { font-size: clamp(22px, 2vw, 28px); }
+.groupbar { gap: 12px; }
+.groupbar span+span { padding-left: 12px; }
+.tablewrap { width: 100%; max-width: 100%; overflow-x: auto; }
+.tablewrap table { width: 100%; min-width: 490px; }
+.tablewrap th, .tablewrap td { padding: 10px 9px; overflow-wrap: anywhere; }
+.progress { grid-template-columns: minmax(0, 2fr) minmax(180px, 1fr); }
+.progress svg { display: block; width: 100%; min-height: 160px; }
+@media (max-width: 1150px) {
+  .columns { grid-template-columns: minmax(0, 1fr); }
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 850px) {
+  :scope { grid-template-columns: minmax(0, 1fr); }
+  aside { width: 100%; display: flex; flex-wrap: wrap; padding: 8px; min-height: 0; }
+  aside a { font-size: 14px; padding: 10px; margin: 0; }
+  main { padding: 16px 12px 28px; }
+  .groupbar span+span { border-left: 0; padding-left: 0; }
+  .progress { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 480px) {
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .metric { padding: 10px; }
+  h1 { font-size: 24px; }
+  h2 { font-size: 18px; }
+}
+}
+
+/* ==============================================================
+   TEAMFLOW / NHOM CUA TOI — FULL-WIDTH, BALANCED LAYOUT
+   Visual-only. Existing Joomla forms, links and MySQL remain intact.
+   ============================================================== */
+
+/* Cassiopeia: avoid squeezing the component beside Joomla side modules. */
+@supports selector(body:has(.teamflow-dashboard)) {
+  body:has(.teamflow-dashboard) .site-grid {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  body:has(.teamflow-dashboard) .container-component {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  body:has(.teamflow-dashboard) .container-sidebar-left,
+  body:has(.teamflow-dashboard) .container-sidebar-right,
+  body:has(.teamflow-dashboard) .container-top-a,
+  body:has(.teamflow-dashboard) .container-top-b,
+  body:has(.teamflow-dashboard) .container-bottom-a,
+  body:has(.teamflow-dashboard) .container-bottom-b {
+    display: none !important;
+  }
+  body:has(.teamflow-dashboard) .com-content-article,
+  body:has(.teamflow-dashboard) .com-teamflow,
+  body:has(.teamflow-dashboard) .item-page {
+    max-width: none !important;
+    width: 100% !important;
+  }
+}
+
+/* Only style the TeamFlow dashboard: no leakage to other Joomla pages. */
+.teamflow-dashboard {
+  --navy: #113862;
+  --blue: #0969b8;
+  --sidebar: #095a9e;
+  --pale: #eaf5ff;
+  --border: #c8dbf4;
+  --bg: #eff6ff;
+  --ink: #173960;
+  display: grid !important;
+  grid-template-columns: 216px minmax(0, 1fr) !important;
+  grid-template-rows: auto 1fr !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  min-height: 780px;
+  background: linear-gradient(115deg,#f6fbff 0%,#eaf4ff 65%,#dcecff 100%);
+  color: #173960;
+  font-size: 15px;
+}
+.teamflow-dashboard > header {
+  grid-column: 1 / -1 !important;
+  grid-row: 1 !important;
+  min-height: 78px;
+  height: auto;
+  padding: 16px 24px !important;
+  background: #fff !important;
+  border-bottom: 1px solid #c8ddf5;
+  box-shadow: 0 2px 10px rgba(31,78,130,.04);
+}
+.teamflow-dashboard > aside {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  position: static !important;
+  width: 216px !important;
+  min-height: 100% !important;
+  padding: 22px 12px !important;
+  background: linear-gradient(165deg,#146bb2,#07518c) !important;
+  border-radius: 0;
+}
+.teamflow-dashboard > aside a {
+  padding: 14px 14px !important;
+  margin-bottom: 7px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #fff;
+  text-decoration: none;
+}
+.teamflow-dashboard > aside a.active { color: #084a83; background: #fff; }
+.teamflow-dashboard > aside a:hover:not(.active) { background: rgba(255,255,255,.14); }
+.teamflow-dashboard > main {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  margin: 0 !important;
+  padding: 26px clamp(18px,2.3vw,36px) 42px !important;
+  min-width: 0;
+  max-width: none !important;
+  width: 100% !important;
+  background: transparent;
+}
+.teamflow-dashboard h1 { font-size: clamp(24px,2.4vw,31px); color:#0b376a; letter-spacing:.2px; }
+.teamflow-dashboard h2 { font-size: clamp(18px,1.7vw,22px); color:#0f3b6e; }
+.teamflow-dashboard .groupbar {
+  display:flex; align-items:center; gap:14px;
+  background:#fff; border:1px solid #c5dcfa;
+  border-radius:14px; padding:16px 20px; margin: 0 0 16px;
+  box-shadow:0 4px 14px rgba(31,86,153,.035);
+}
+.teamflow-dashboard .groupbar span+span { border-color:#c5d8ed; padding-left:14px; }
+.teamflow-dashboard .metrics {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  gap:14px; margin:0 0 18px;
+}
+.teamflow-dashboard .metric {
+  display:flex; align-items:center;
+  min-width:0; min-height:112px;
+  padding:19px !important; gap:13px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.96);
+  box-shadow:0 5px 15px rgba(30,90,154,.055);
+}
+.teamflow-dashboard .metric:nth-child(1) { background:linear-gradient(145deg,#f9fcff,#dcecff); }
+.teamflow-dashboard .metric:nth-child(2) { background:linear-gradient(145deg,#f7fff9,#d4f5e4); }
+.teamflow-dashboard .metric:nth-child(3) { background:linear-gradient(145deg,#fffdf5,#fff0d2); }
+.teamflow-dashboard .metric:nth-child(4) { background:linear-gradient(145deg,#fdfaff,#eadcff); }
+.teamflow-dashboard .metric .ico { flex:0 0 auto; }
+.teamflow-dashboard .metric .ico img { width:38px; height:38px; object-fit:contain; }
+.teamflow-dashboard .metric label { font-size:14px; line-height:1.35; color:#416286; }
+.teamflow-dashboard .metric strong { font-size:clamp(25px,2.1vw,32px); line-height:1.2; color:#0c4d90; }
+.teamflow-dashboard .metric:nth-child(2) strong { color:#168452; }
+.teamflow-dashboard .metric:nth-child(3) strong { color:#d47b0b; }
+.teamflow-dashboard .metric:nth-child(4) strong { color:#794ac0; }
+.teamflow-dashboard .columns {
+  display:grid;
+  grid-template-columns:minmax(0,1.5fr) minmax(330px,1fr) !important;
+  gap:16px !important;
+  align-items:stretch;
+}
+.teamflow-dashboard .columns > .panel { min-width:0; height:100%; }
+.teamflow-dashboard .panel {
+  min-width:0; padding:18px !important;
+  background:#fff; border:1px solid #c6daf6;
+  border-radius:14px; margin:0 0 16px;
+  box-shadow:0 5px 18px rgba(30,90,154,.045);
+}
+.teamflow-dashboard .panelhead { align-items:center; gap:12px; margin-bottom:15px; }
+.teamflow-dashboard .panelhead h2 { margin:0; }
+.teamflow-dashboard .primary { background:#086eb9; border-radius:9px; padding:11px 17px; }
+.teamflow-dashboard .secondary { border-radius:9px; }
+.teamflow-dashboard .tablewrap { max-width:100%; overflow-x:auto; border-radius:10px; }
+.teamflow-dashboard .tablewrap table { width:100%; min-width:540px; border-collapse:collapse; table-layout:auto; }
+.teamflow-dashboard .tablewrap th {
+  background:#dbeafe; color:#19416d;
+  font-size:13px; font-weight:700; white-space:normal;
+}
+.teamflow-dashboard .tablewrap th,
+.teamflow-dashboard .tablewrap td {
+  padding:12px 11px; border-color:#d5e3f3;
+  font-size:13px; line-height:1.5; vertical-align:middle;
+  overflow-wrap:normal; word-break:normal;
+}
+.teamflow-dashboard .tablewrap td { color:#234461; }
+.teamflow-dashboard .tablewrap tbody tr:nth-child(even) td { background:#f9fcff; }
+.teamflow-dashboard .tf-pending-card { border-radius:12px; }
+.teamflow-dashboard .tf-review-note { min-height:108px; font-size:14px; }
+.teamflow-dashboard .progress { grid-template-columns:minmax(0,1.75fr) minmax(185px,1fr); }
+.teamflow-dashboard .progress svg { min-height:170px; }
+
+@media (max-width:1160px) {
+  .teamflow-dashboard .columns { grid-template-columns:minmax(0,1fr) !important; }
+  .teamflow-dashboard .columns > .panel { height:auto; }
+  .teamflow-dashboard .metrics { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+}
+@media (max-width:760px) {
+  .teamflow-dashboard { grid-template-columns:minmax(0,1fr) !important; grid-template-rows:auto auto 1fr !important; }
+  .teamflow-dashboard > header { grid-column:1 !important; grid-row:1 !important; padding:12px 15px !important; }
+  .teamflow-dashboard > aside {
+    grid-column:1 !important; grid-row:2 !important;
+    width:100% !important; min-height:0 !important;
+    display:flex; gap:6px; overflow-x:auto; padding:8px !important;
+  }
+  .teamflow-dashboard > aside a { margin:0 !important; white-space:nowrap; padding:10px 12px !important; font-size:13px; }
+  .teamflow-dashboard > main { grid-column:1 !important; grid-row:3 !important; padding:16px 12px 28px !important; }
+  .teamflow-dashboard .metric { min-height:95px; padding:13px !important; }
+  .teamflow-dashboard .metric .ico img { width:30px; height:30px; }
+  .teamflow-dashboard .progress { grid-template-columns:minmax(0,1fr); }
+}
+@media (max-width:420px) {
+  .teamflow-dashboard .metrics { gap:9px; }
+  .teamflow-dashboard .metric { gap:8px; }
+  .teamflow-dashboard .metric label { font-size:12px; }
+  .teamflow-dashboard .metric strong { font-size:23px; }
+}
+
+
+
+/* Đưa nút Phân công sang góc trên bên phải */
+.teamflow-dashboard .tf-assignment-header {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    gap: 12px !important;
+    margin-bottom: 16px;
+}
+
+/* Tiêu đề nằm bên trái */
+.teamflow-dashboard .tf-assignment-header h2 {
+    margin: 0 !important;
+    flex: 1;
+}
+
+/* Nút Phân công nằm bên phải */
+.teamflow-dashboard #tf-open-assign {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    width: auto !important;
+    height: 42px !important;
+    padding: 6px 14px !important;
+    gap: 8px;
+    margin-left: auto !important;
+}
+
+/* Chỉ chỉnh kích thước icon */
+.teamflow-dashboard #tf-open-assign img {
+    width: 30px !important;
+    height: 30px !important;
+    max-width: 30px !important;
+    max-height: 30px !important;
+    margin: 0 !important;
+    object-fit: contain !important;
+}
+.teamflow-dashboard .tf-assignment-header {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.teamflow-dashboard .tf-assignment-header h2 {
+    margin: 0 !important;
+}
+
+.teamflow-dashboard #tf-open-assign {
+    margin-left: auto !important;
+    flex-shrink: 0;
+}
+
+
+/* ===== HAI NUT DUYET BAI ===== */
+
+.teamflow-dashboard .tf-review-buttons {
+    display: flex !important;
+    gap: 8px !important;
+    width: 100%;
+    margin-top: 12px;
+}
+
+/* Kich thuoc chung */
+.teamflow-dashboard .tf-review-buttons button {
+    flex: 1 1 0 !important;
+    min-width: 0;
+    min-height: 64px !important;
+    padding: 10px 12px !important;
+    border-radius: 9px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    line-height: 1.3;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+/* Nut DAT - xanh la */
+.teamflow-dashboard .tf-review-buttons .tf-review-approve {
+    background: #e4f8ed !important;
+    color: #087d43 !important;
+    border: 1px solid #76cda0 !important;
+}
+
+.teamflow-dashboard .tf-review-buttons .tf-review-approve:hover {
+    background: #cef1df !important;
+}
+
+/* Nut YEU CAU CHINH SUA - tim */
+.teamflow-dashboard .tf-review-buttons .tf-review-revise {
+    background: #f3e8ff !important;
+    color: #7734c5 !important;
+    border: 1px solid #ad7ce6 !important;
+}
+
+.teamflow-dashboard .tf-review-buttons .tf-review-revise:hover {
+    background: #ead8ff !important;
+}
+
+/* BO LOC TRONG NHOM CUA TOI */
+.teamflow-dashboard .tf-dashboard-filters {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    padding: 12px;
+    margin: 14px 0 10px;
+    background: #f4f8ff;
+    border: 1px solid #d6e5f8;
+    border-radius: 10px;
+}
+
+.teamflow-dashboard .tf-filter-field {
+    min-width: 0;
+}
+
+.teamflow-dashboard .tf-filter-field label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: #173960;
+}
+
+.teamflow-dashboard .tf-filter-field select {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    height: 36px;
+    padding: 6px 8px;
+    border: 1px solid #bfd1e7;
+    border-radius: 7px;
+    background: #fff;
+    color: #173960;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+
+.teamflow-dashboard .tf-filter-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.teamflow-dashboard #tf-apply-filter,
+.teamflow-dashboard #tf-clear-filter {
+    width: auto;
+    min-height: 36px;
+    padding: 8px 14px;
+    border-radius: 7px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.teamflow-dashboard #tf-apply-filter {
+    background: #086eb9;
+    border: 1px solid #086eb9;
+    color: white;
+}
+
+.teamflow-dashboard #tf-clear-filter {
+    background: white;
+    border: 1px solid #bfd1e7;
+    color: #173960;
+}
+
+.teamflow-dashboard .tf-filter-count {
+    font-size: 12px;
+    color: #607991;
+    margin: 0 0 10px;
+}
+
+@media (max-width: 700px) {
+    .teamflow-dashboard .tf-dashboard-filters {
+        grid-template-columns: 1fr;
+    }
+}
